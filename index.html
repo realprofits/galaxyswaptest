@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="assets/logo-icon.png">
+    <title>Galaxy Swap</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <!-- Floating socials (left) -->
+    <div class="socials" aria-label="Social links">
+        <a class="social-btn" href="https://t.me/SwapYourCrypto" target="_blank" rel="noopener" title="Telegram"
+            aria-label="Telegram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M9.993 15.677 9.85 19.9c.446 0 .64-.192.872-.422l2.094-2.01 4.34 3.18c.796.44 1.36.208 1.558-.736l2.822-13.245.001-.001c.23-1.078-.39-1.5-1.167-1.2L2.67 10.2c-1.05.409-1.034.996-.18 1.263l4.72 1.472 10.95-6.91c.515-.342.984-.152.598.19l-8.765 7.462Z" />
+            </svg>
+        </a>
+        <a class="social-btn" href="https://discord.gg/CryptoExchange" target="_blank" rel="noopener" title="Discord"
+            aria-label="Discord">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.078.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 11.73 11.73 0 0 0-.617-1.249.077.077 0 0 0-.078-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.055 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.105 13.26 13.26 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.371-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.1.245.198.372.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.076.076 0 0 0-.04.106c.36.698.772 1.362 1.225 1.993a.077.077 0 0 0 .084.028 19.83 19.83 0 0 0 6.002-3.03.077.077 0 0 0 .03-.054c.5-5.177-.838-9.674-3.549-13.661a.06.06 0 0 0-.031-.028ZM8.02 15.331c-1.182 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.175 1.095 2.157 2.419 0 1.333-.956 2.419-2.157 2.419Zm7.974 0c-1.182 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.175 1.095 2.157 2.419 0 1.333-.946 2.419-2.157 2.419Z" />
+            </svg>
+        </a>
+    </div>
+
+    <!-- Sticky Top Bar -->
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-mark">Ξ</div>
+
+            <div class="brand-name">
+                <img src="assets/logo-text.png" alt="GalaxySwap" class="brand-logo">
+                <div class="brand-sub" id="priceStatus">Loading prices…</div>
+            </div>
+
+
+            <!-- Currency selector next to brand (like screenshot) -->
+            <div class="fiat-inline">
+                <select id="fiatSelect" class="fiat-select" aria-label="Display currency">
+                    <option value="usd" selected>USD</option>
+                    <option value="eur">EUR</option>
+                    <option value="gbp">GBP</option>
+                    <option value="cad">CAD</option>
+                    <option value="aud">AUD</option>
+                </select>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <button data-scroll="swap">Swap</button>
+            <button data-scroll="faq">FAQ</button>
+            <button data-scroll="terms">Terms</button>
+            <button data-scroll="support">Support</button>
+            <button id="trackBtn" class="track-btn" type="button" aria-haspopup="dialog" aria-controls="trackPanel">
+                Track Orders
+            </button>
+        </nav>
+
+    </header>
+
+    <main>
+        <!-- Swap Section -->
+        <section id="swap" class="section">
+            <div class="hero">
+                <div class="pill">
+                    <span class="dot"></span>
+                    <span class="pill-text">AUTO CRYPTO → CRYPTO</span>
+                </div>
+                <h1 class="hero-title">
+                    <strong><span class="tw-static">Swap</span> <span id="typewriter"
+                            class="tw-dynamic"></span></strong><span class="cursor" aria-hidden="true">▍</span>
+                </h1>
+                <p>Instant crypto swaps with no limits or regulations.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card swap-card">
+                    <div class="swap-panel">
+
+                        <div class="swap-block">
+                            <div class="row-top">
+                                <div class="row-label">From</div>
+                                <div class="row-usd">~ <span id="fromFiat">—</span></div>
+                            </div>
+
+                            <div class="row-main">
+                                <input id="fromAmount" inputmode="decimal" value="0.001" />
+                                <div class="dd" id="fromDD"></div>
+                            </div>
+
+                            <div class="row-mini" id="fromPriceLine">—</div>
+                        </div>
+
+                        <div class="swap-mid">
+                            <button class="flip-btn" id="swapFlipBtn" title="Swap direction">⇅</button>
+                        </div>
+
+                        <div class="swap-block">
+                            <div class="row-top">
+                                <div class="row-label">To</div>
+                                <div class="row-usd">~ <span id="toFiat">—</span></div>
+                            </div>
+
+                            <div class="row-main">
+                                <input id="toAmount" readonly placeholder="—" />
+                                <div class="dd" id="toDD"></div>
+                            </div>
+
+                            <div class="row-mini" id="toPriceLine">—</div>
+                            <div class="row-mini">Includes fee: <span id="feePct">1.50%</span></div>
+                        </div>
+
+                        <div class="addr-help">Add receiving address and refund address to enable exchange.</div>
+
+                        <input class="addr" id="receiveAddr" placeholder="Receiving Wallet Address" />
+                        <input class="addr" id="refundAddr" placeholder="Refund Wallet Address" />
+
+                        <button class="cta" id="swapBtn" disabled>Exchange →</button>
+
+                        <div class="disclaimer">
+                            Please ensure you have entered the correct information. Always double check wallet
+                            addresses.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card steps-card">
+                    <div class="steps-title">Steps</div>
+
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-dot"></div>
+                            <div>
+                                <div class="step-t">Select Currencies</div>
+                                <div class="step-d">Choose coins and enter the amount you want to exchange.</div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-dot"></div>
+                            <div>
+                                <div class="step-t">Enter Destination Address</div>
+                                <div class="step-d">Provide the wallet address where you want to receive funds.</div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-dot"></div>
+                            <div>
+                                <div class="step-t">Enter Refund Address</div>
+                                <div class="step-d">Backup address if the swap needs to be reversed.</div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-dot"></div>
+                            <div>
+                                <div class="step-t">Confirm & Send</div>
+                                <div class="step-d">Review details and send funds to complete your swap.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section">
+            <div class="section-title">
+                <div class="pill"><span class="pill-text">FAQ</span></div>
+                <h2>Frequently Asked Questions<span class="red">.</span></h2>
+            </div>
+
+            <div class="faq" id="faqList">
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">How does the swap work?</button>
+                    <div class="faq-a" role="region">Our system automatically calculates the exchange rate using live
+                        market prices. You send one cryptocurrency, and the converted amount is delivered directly to
+                        your destination wallet.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">Do I need to create an account?</button>
+                    <div class="faq-a" role="region">No. Swaps are performed without accounts or registration. You only
+                        need a valid destination wallet address.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">Is KYC required?</button>
+                    <div class="faq-a" role="region">No KYC is required for standard crypto-to-crypto swaps. We also do
+                        not store user data to ensure the best privacy for our users.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">How long does a swap take?</button>
+                    <div class="faq-a" role="region">Most swaps are completed within 5–10 minutes after the transaction
+                        receives enough blockchain confirmations. Network congestion can occasionally cause delays.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">Are there any fees?</button>
+                    <div class="faq-a" role="region">Yes. The quoted rate includes a small service fee and network fees.
+                        The final amount you receive is shown before you confirm the swap.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">Why did the final amount change
+                        slightly?</button>
+                    <div class="faq-a" role="region">Cryptocurrency prices can change rapidly. Small differences may
+                        occur due to market volatility or network fees between the time you initiate and complete the
+                        swap.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">What is a refund address and why is it
+                        required?</button>
+                    <div class="faq-a" role="region">A refund address is used to return funds if a swap fails or cannot
+                        be completed. This helps ensure your funds are never lost.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">Can a transaction be reversed?</button>
+                    <div class="faq-a" role="region">Blockchain transactions are irreversible. Once a swap is sent and
+                        processed, it cannot be canceled. Always double-check addresses and amounts before sending.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button" aria-expanded="false">Can I track my swap?</button>
+                    <div class="faq-a" role="region">Yes. After initiating a swap, you can track progress using the
+                        panel. Access it by clicking the button in the corner.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms -->
+        <section id="terms" class="section">
+            <div class="section-title">
+                <div class="pill"><span class="pill-text">TERMS</span></div>
+                <h2>Terms of Service<span class="red">.</span></h2>
+            </div>
+            <div class="card text-card">
+                1. Acceptance of Terms
+                <br>
+
+                By accessing or using this website (“the Service”), you agree to be bound by these Terms of Service. If
+                you do not agree, you must not use the Service.
+                <br><br>
+
+                2. Description of the Service
+                <br>
+
+                The Service provides automated cryptocurrency-to-cryptocurrency exchange rate estimates and facilitates
+                swaps between supported digital assets. The Service does not provide custodial wallet services and does
+                not store users’ private keys.
+                <br><br>
+
+                3. Eligibility
+                <br>
+
+                You must be legally permitted to use cryptocurrency services in your jurisdiction. You are solely
+                responsible for ensuring that your use of the Service complies with all applicable laws and regulations.
+                <br><br>
+
+                4. No Financial Advice
+                <br>
+
+                All information provided by the Service is for informational purposes only. Nothing on this website
+                constitutes financial, investment, legal, or tax advice. You are solely responsible for your financial
+                decisions.
+                <br><br>
+
+                5. No KYC / Identity Verification
+                <br>
+
+                The Service does not require account registration or identity verification for standard crypto-to-crypto
+                swaps. However, transactions may be delayed, rejected, or refunded if required by network conditions,
+                service providers, or compliance obligations.
+                <br><br>
+
+                6. Swap Process
+                <br>
+
+                Exchange rates are based on live market data and may change due to market volatility.
+                <br>
+
+                The final amount received may differ slightly from the estimate shown.
+                <br>
+
+                Network fees and service fees are included in the quoted rate unless otherwise stated.
+                <br><br>
+
+                7. Refund Address
+                <br>
+
+                Users must provide a valid refund address. If a swap cannot be completed, funds may be returned to the
+                refund address minus applicable network fees. Failure to provide a valid refund address may result in
+                permanent loss of funds.
+                <br><br>
+
+                8. Irreversible Transactions
+                <br>
+
+                Cryptocurrency transactions are irreversible. Once a transaction is broadcast to the blockchain, it
+                cannot be canceled or reversed. Always verify wallet addresses and amounts before sending funds.
+                <br><br>
+
+                9. User Responsibilities
+                <br>
+
+                You are responsible for:
+
+                Providing accurate wallet addresses
+
+                Sending the correct cryptocurrency and amount
+
+                Ensuring the destination wallet supports the selected asset
+
+                Understanding the risks of blockchain transactions
+
+                The Service is not responsible for losses caused by user error.
+                <br><br>
+
+                10. Supported Wallets and Exchanges
+                <br>
+
+                Some centralized exchanges do not support refunds or smart contract interactions. Sending funds from
+                unsupported exchanges may result in loss of funds. The Service is not liable for such losses.
+                <br><br>
+
+                11. Service Availability
+                <br>
+
+                The Service is provided “as is” and “as available.” We do not guarantee uninterrupted availability,
+                accuracy of pricing, or completion time. Maintenance, network congestion, or third-party failures may
+                affect service performance.
+                <br><br>
+
+                12. Limitation of Liability
+                <br>
+
+                To the maximum extent permitted by law, the Service and its operators shall not be liable for any
+                direct, indirect, incidental, or consequential damages arising from the use or inability to use the
+                Service.
+                <br><br>
+
+                13. Indemnification
+                <br>
+
+                You agree to indemnify and hold harmless the Service and its operators from any claims, damages, losses,
+                or expenses arising from your use of the Service or violation of these Terms.
+                <br><br>
+
+                14. Prohibited Use
+                <br>
+
+                You agree not to use the Service for:
+
+                Illegal activities
+
+                Fraud, money laundering, or sanctions violations
+
+                Abuse, exploitation, or interference with the Service
+
+                The Service reserves the right to refuse or block transactions suspected of prohibited activity.
+                <br><br>
+
+                15. Modifications
+                <br>
+
+                We reserve the right to modify these Terms of Service at any time. Changes take effect immediately upon
+                publication on the website. Continued use of the Service constitutes acceptance of the updated terms.
+                <br><br>
+
+                16. Governing Law
+                <br>
+
+                These Terms shall be governed by and construed in accordance with the laws of the applicable
+                jurisdiction, without regard to conflict of law principles.
+                <br><br>
+
+                17. Contact
+                <br>
+
+                For questions regarding these Terms, please contact support via our Telegram or Discord channels, linked
+                on the left side of the website.
+            </div>
+        </section>
+
+        <!-- Support -->
+        <section id="support" class="section">
+            <div class="section-title">
+                <div class="pill"><span class="pill-text">SUPPORT</span></div>
+                <h2>Need help?<span class="red">.</span></h2>
+            </div>
+            <div class="card text-card">
+                You can contact us directly on Telegram or Discord. Access these by clicking on the respective icon on
+                the left side of the page.
+            </div>
+
+            <footer class="footer">© <span id="year"></span> <img src="assets/logo-text.png" alt="GalaxySwap"
+                    class="brand-logo-text"> — All rights reserved.</footer>
+        </section>
+
+        <!-- Backdrop (blur/dim) -->
+        <div id="trackBackdrop" class="track-backdrop" hidden></div>
+
+        <!-- Slide-out panel -->
+        <aside id="trackPanel" class="track-panel" aria-hidden="true">
+            <div class="track-header">
+                <div>
+                    <div class="track-title">Track your orders</div>
+                    <div class="track-sub">Paste your Order ID or TXID Hash to view status.</div>
+                </div>
+
+                <button id="trackCloseBtn" class="track-close" type="button" aria-label="Close">
+                    ✕
+                </button>
+            </div>
+
+            <div class="track-body">
+                <label class="track-label" for="trackInput">Order ID / TXID Hash</label>
+                <input id="trackInput" class="track-input" placeholder="e.g. 8f1a... or TX hash" />
+
+                <button id="trackSearchBtn" class="track-search" type="button">
+                    Search
+                </button>
+
+                <div id="trackResult" class="track-result">
+                    <div class="track-empty">No order loaded yet.</div>
+                </div>
+
+                <div class="track-help">
+                    Tip: If you don’t have an Order ID, use the transaction hash from your wallet.
+                </div>
+            </div>
+        </aside>
+
+        <!-- Exchange backdrop (blur/dim) -->
+        <div id="exBackdrop" class="ex-backdrop" hidden></div>
+
+        <!-- Exchange modal -->
+        <div id="exModal" class="ex-modal" role="dialog" aria-modal="true" aria-hidden="true">
+            <div class="ex-head">
+                <div>
+                    <div class="ex-title">Complete your swap</div>
+                    <div class="ex-sub">Send the exact amount below to the deposit address.</div>
+                </div>
+                <button id="exCloseBtn" class="ex-close" type="button" aria-label="Close">✕</button>
+            </div>
+
+            <div class="ex-body">
+                <div class="ex-grid">
+                    <!-- Left: payment details -->
+                    <div class="ex-card">
+                        <div class="ex-kv">
+                            <div class="ex-k">You send</div>
+                            <div class="ex-v">
+                                <span id="exSendCrypto" class="ex-strong">—</span>
+                                <span id="exSendFiat" class="ex-muted">—</span>
+                            </div>
+                        </div>
+                        <div class="ex-kv">
+                            <div class="ex-k">You receive</div>
+                            <div class="ex-v">
+                                <span id="exReceiveCrypto" class="ex-strong">—</span>
+                                <span id="exReceiveFiat" class="ex-muted">—</span>
+                            </div>
+                        </div>
+
+                        <div class="ex-kv">
+                            <div class="ex-k">Status</div>
+                            <div class="ex-v"><span id="exStatus">waiting for payment</span></div>
+                        </div>
+
+                        <div class="ex-kv">
+                            <div class="ex-k">Deposit address</div>
+                            <div class="ex-v">
+                                <div class="ex-address-row">
+                                    <code id="exDepositAddress" class="ex-address">DEPOSIT_ADDRESS_PLACEHOLDER</code>
+                                    <button id="exCopyAddrBtn" class="ex-mini" type="button">Copy</button>
+                                </div>
+                                <div class="ex-note">Invoice will be automatically updated when funds have been detected
+                                    on the blockchain.</div>
+                            </div>
+                        </div>
+
+                        <div class="ex-kv">
+                            <div class="ex-k">Network</div>
+                            <div class="ex-v"><span id="exNetwork">—</span></div>
+                        </div>
+
+                        <div class="ex-warn">
+                            Only send <b id="exWarnCoin">—</b> to this address. Sending any other asset may result in
+                            loss of funds.
+                        </div>
+                    </div>
+
+                    <!-- Right: QR -->
+                    <div class="ex-card">
+                        <div class="ex-k">QR Code</div>
+                        <div class="ex-qr">
+                            <img id="exQrImg" class="ex-qr-img" alt="QR code" />
+                            <div id="exQrFallback" class="ex-qr-placeholder" style="display:none;">QR unavailable</div>
+                        </div>
+                        <button id="exCopyAmountBtn" class="ex-btn" type="button">Copy Amount</button>
+                        <button id="exDoneBtn" class="ex-btn secondary" type="button">I’ve Sent Payment</button>
+                        <div class="ex-note">
+                            Scan the QR code with your wallet to send the exact amount shown above.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </main>
+
+    <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
